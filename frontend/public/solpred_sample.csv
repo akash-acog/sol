@@ -1,18 +1,18 @@
-SMILES_Solute,Temperature_K,Solvent,SMILES_Solvent,Solubility(mole_fraction),Solubility(mol/L),LogS(mol/L),Compound_Name,CAS,PubChem_CID,FDA_Approved,Source
-COC(=O)C1CC(=O)C(C(=O)OC)CC1=O,298.15,ethanol,CCO,0.00042,0.00716358523,−2.14486956750,Dimethyl succinylsuccinate,6289-46-9,94866.0,No,10.1016/j.fluid.2013.06.037
-Cc1cc(C)nc(NS(=O)(=O)c2ccc(N)cc2)n1,298.15,ethanol,CCO,0.0000918,0.00156524112,−2.80541874864,Sulfamethazine,57-68-1,5327.0,Yes,10.1016/j.fluid.2013.09.018
-CCN1CCN(C(=O)N[C@@H](C(=O)N[C@@H]2C(=O)N3C(C(=O)O)=C(CSc4nnnn4C)CS[C@H]23)c2ccc(O)cc2)C(=O)C1=O,298.15,ethanol,CCO,0.00003721,0.00063441658,−3.19762546948,Cefoperazone,62893-19-0,44187.0,Yes,10.1016/j.fluid.2013.11.005
-O=C(O)CC(O)C(=O)O,298.15,ethanol,CCO,0.109,2.08567912294,0.319247493998,Malic acid,6915-15-7,525.0,Yes,10.1016/j.fluid.2014.06.017
-CCn1c2ccccc2c2ccccc21,299.15,ethanol,CCO,0.0149,0.25749558132,−0.58923021914,N-ethylcarbazole,86-28-2,6836.0,No,10.1016/j.fluid.2014.06.030
-O=C(O)CN(CC(=O)O)CP(=O)(O)O,298.15,,CCO,,,,,,,,
-CP(=O)(O)O,298.25,ethanol,CCO,0.4778,15.5922355588,1.19290838723,Methylphosphonic acid,993-13-5,13818.0,No,10.1016/j.fluid.2015.01.009
-O=c1ccc2ccccc2o1,298.15,ethanol,CCO,0.05332,0.96025292499,−0.01761436127,Coumarin,91-64-5,323.0,Yes,10.1016/j.fluid.2015.03.022
-CC(=O)Nc1ccc(O)cc1,295.69,ethanol,CCO,0.0539,0.97361347391,−0.01161342450,Paracetamol,103-90-2,1983.0,Yes,10.1016/j.fluid.2015.07.032
-CC(=O)Oc1ccccc1C(=O)O,292.45,ethanol,CCO,0.0487,0.87802176315,−0.05649471928,Aspirin,50-78-2,2244.0,Yes,10.1016/j.fluid.2015.07.032
-CN=C(NC#N)NCCSCc1nc[nH]c1C,297.26,ethanol,CCO,0.005,0.08572832436,−1.06687566487,Cimetidine,51481-61-9,2756.0,No,10.1016/j.fluid.2015.07.032
-COc1ccc2nc(SCc3ncc(C)c(OC)c3C)[nH]c2c1,298.05,ethanol,CCO,0.00773,0.13278389725,−0.87685458881,Omeprazole sulfide,73590-85-9,155794.0,No,10.1016/j.fluid.2015.07.038
-CCOc1ccccc1C(N)=O,298.15,ethanol,CCO,0.01707,0.29608038093,−0.52859036915,Ethenzamide,938-73-8,3282.0,No,10.1016/j.fluid.2016.08.019
-CC(=O)NC[C@H]1CN(c2ccc(N3CCOCC3)c(F)c2)C(=O)O1,298.15,ethanol,CCO,0.001657,0.02829706753,−1.54825856865,Linezolid,165800-03-3,441401.0,Yes,10.1016/j.fluid.2016.10.021
-Nc1ccn([C@@H]2O[C@H](CO)[C@@H](O)[C@@H]2O)c(=O)n1,298.15,ethanol,CCO,0.0003,0.00511623238,−2.29104973729,Cytarabine,147-94-4,6253.0,Yes,10.1016/j.fluid.2017.04.021
-CCCCCOC(=O)Nc1nc(=O)n([C@@H]2O[C@H](C)[C@@H](O)[C@H]2O)cc1F,297.75,ethanol,CCO,0.0353,0.62391175590,−0.20487683120,Capecitabine,154361-50-9,60953.0,Yes,10.1016/j.fluid.2017.12.024
-Cc1cc(C)c(C(=O)P(=O)(c2ccccc2)c2ccccc2)c(C)c1,273.15,ethanol,CCO,0.07606,1.44204427615,0.15897859505,(2,4,6-trimethylbenzoyl) diphenylphosphine oxide,75980-60-8,166480.0,No,10.1016/j.fluid.2018.01.015
+Solute_Name,SMILES_Solute,Solvent_Name,SMILES_Solvent,Temperature_K
+Dimethyl succinylsuccinate,COC(=O)C1CC(=O)C(C(=O)OC)CC1=O,ethanol,CCO,298.15
+Sulfamethazine,Cc1cc(C)nc(NS(=O)(=O)c2ccc(N)cc2)n1,ethanol,CCO,298.15
+Cefoperazone,CCN1CCN(C(=O)N[C@@H](C(=O)N[C@@H]2C(=O)N3C(C(=O)O)=C(CSc4nnnn4C)CS[C@H]23)c2ccc(O)cc2)C(=O)C1=O,ethanol,CCO,298.15
+Malic acid,O=C(O)CC(O)C(=O)O,ethanol,CCO,298.15
+N-ethylcarbazole,CCn1c2ccccc2c2ccccc21,ethanol,CCO,299.15
+PMIDA,O=C(O)CN(CC(=O)O)CP(=O)(O)O,CCO,CCO,298.15
+Methylphosphonic acid,CP(=O)(O)O,ethanol,CCO,298.25
+Coumarin,O=c1ccc2ccccc2o1,ethanol,CCO,298.15
+Paracetamol,CC(=O)Nc1ccc(O)cc1,ethanol,CCO,295.69
+Aspirin,CC(=O)Oc1ccccc1C(=O)O,ethanol,CCO,292.45
+Cimetidine,CN=C(NC#N)NCCSCc1nc[nH]c1C,ethanol,CCO,297.26
+Omeprazole sulfide,COc1ccc2nc(SCc3ncc(C)c(OC)c3C)[nH]c2c1,ethanol,CCO,298.05
+Ethenzamide,CCOc1ccccc1C(N)=O,ethanol,CCO,298.15
+Linezolid,CC(=O)NC[C@H]1CN(c2ccc(N3CCOCC3)c(F)c2)C(=O)O1,ethanol,CCO,298.15
+Cytarabine,Nc1ccn([C@@H]2O[C@H](CO)[C@@H](O)[C@@H]2O)c(=O)n1,ethanol,CCO,298.15
+Capecitabine,CCCCCOC(=O)Nc1nc(=O)n([C@@H]2O[C@H](C)[C@@H](O)[C@H]2O)cc1F,ethanol,CCO,297.75
+TPO,Cc1cc(C)c(C(=O)P(=O)(c2ccccc2)c2ccccc2)c(C)c1,ethanol,CCO,273.15

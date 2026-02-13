@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Play, FlaskConical } from "lucide-react";
+import { Loader2, Play, FlaskConical, X } from "lucide-react";
 import { PredictionResult, AnalysisResponse } from "@/lib/types";
 import { API_BASE_URL } from "@/lib/constants";
 import { toast } from "sonner";
@@ -25,6 +25,7 @@ const SAMPLE_DATA = {
   name: "Acetaminophen",
   smiles: "CC(=O)NC1=CC=C(O)C=C1",
   solvent: "CCO",
+  solventName: "Ethanol", // ← NEW: Added solvent name
   temperature: "300",
 };
 
@@ -37,27 +38,43 @@ export default function SingleSmilesInput({
   const [soluteName, setSoluteName] = useState("");
   const [soluteSmiles, setSoluteSmiles] = useState("");
   const [solventSmiles, setSolventSmiles] = useState("");
+  const [solventName, setSolventName] = useState(""); // ← NEW: Added solvent name state
   const [temperature, setTemperature] = useState("300");
-  const [hasSample, setHasSample] = useState(false);
+
+  // Check if any field has content (not just sample data)
+  const hasContent = () => {
+    if (task === "solpred") {
+      return (
+        soluteName.trim() !== "" ||
+        soluteSmiles.trim() !== "" ||
+        solventSmiles.trim() !== "" ||
+        solventName.trim() !== "" || // ← NEW: Include solvent name in check
+        temperature !== "300"
+      );
+    } else {
+      // solscreen
+      return soluteName.trim() !== "" || soluteSmiles.trim() !== "";
+    }
+  };
 
   const handleTrySample = () => {
-    if (hasSample) {
-      // Clear sample
+    if (hasContent()) {
+      // Clear all fields
       setSoluteName("");
       setSoluteSmiles("");
       setSolventSmiles("");
+      setSolventName(""); // ← NEW: Clear solvent name
       setTemperature("300");
-      setHasSample(false);
-      toast.info("Cleared sample data");
+      toast.info("Cleared all inputs");
     } else {
       // Load sample
       setSoluteName(SAMPLE_DATA.name);
       setSoluteSmiles(SAMPLE_DATA.smiles);
       if (task === "solpred") {
         setSolventSmiles(SAMPLE_DATA.solvent);
+        setSolventName(SAMPLE_DATA.solventName); // ← NEW: Load sample solvent name
         setTemperature(SAMPLE_DATA.temperature);
       }
-      setHasSample(true);
       toast.success(`Loaded ${SAMPLE_DATA.name} sample`);
     }
   };
@@ -86,8 +103,9 @@ export default function SingleSmilesInput({
     try {
       if (task === "solpred") {
         // Solubility Prediction - Create CSV file from input
-        const csvContent = `Compound_Name,SMILES_Solute,SMILES_Solvent,Temperature_K
-${soluteName.trim() || ""},${soluteSmiles.trim()},${solventSmiles.trim()},${temperature}`;
+        // ← NEW: Added Solvent column in CSV
+        const csvContent = `Compound_Name,SMILES_Solute,Solvent,SMILES_Solvent,Temperature_K
+${soluteName.trim() || ""},${soluteSmiles.trim()},${solventName.trim() || ""},${solventSmiles.trim()},${temperature}`;
 
         const blob = new Blob([csvContent], { type: "text/csv" });
         const file = new File([blob], "single_prediction.csv", {
@@ -194,8 +212,17 @@ ${soluteName.trim() || ""},${soluteSmiles.trim()},${solventSmiles.trim()},${temp
             disabled={isProcessing}
             className="h-7 px-2.5 text-xs font-medium gap-1.5 border-primary text-primary hover:bg-primary/10 hover:text-primary bg-primary/5"
           >
-            <FlaskConical className="w-3.5 h-3.5" />
-            {hasSample ? "Clear sample" : "Try sample"}
+            {hasContent() ? (
+              <>
+                <X className="w-3.5 h-3.5" />
+                Clear
+              </>
+            ) : (
+              <>
+                <FlaskConical className="w-3.5 h-3.5" />
+                Try sample
+              </>
+            )}
           </Button>
         </div>
         <Input
@@ -206,7 +233,7 @@ ${soluteName.trim() || ""},${soluteSmiles.trim()},${solventSmiles.trim()},${temp
           disabled={isProcessing}
         />
         {task === "solscreen" && (
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-muted-foreground mt-1">
             Providing a name helps identify the solute in results
           </p>
         )}
@@ -227,6 +254,18 @@ ${soluteName.trim() || ""},${soluteSmiles.trim()},${solventSmiles.trim()},${temp
 
       {task === "solpred" && (
         <>
+          {/* ← NEW: Solvent Name Field */}
+          <div className="space-y-2">
+            <Label htmlFor="solvent-name">Solvent name (Optional)</Label>
+            <Input
+              id="solvent-name"
+              placeholder="e.g., Ethanol"
+              value={solventName}
+              onChange={(e) => setSolventName(e.target.value)}
+              disabled={isProcessing}
+            />
+          </div>
+
           <div className="space-y-2">
             <Label htmlFor="solvent-smiles">Solvent SMILES</Label>
             <Input
@@ -245,8 +284,8 @@ ${soluteName.trim() || ""},${soluteSmiles.trim()},${solventSmiles.trim()},${temp
             <Input
               id="temperature"
               type="number"
-              step="0.01"
-              placeholder="298.15"
+              step="1"
+              placeholder="300"
               value={temperature}
               onChange={(e) => setTemperature(e.target.value)}
               disabled={isProcessing}

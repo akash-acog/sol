@@ -61,7 +61,7 @@ export default function MoleculeTable({ results }: MoleculeTableProps) {
   const [columns, setColumns] = useState<
     { id: string; name: string; visible: boolean }[]
   >([
-    { id: "compound_name", name: "Compound Name", visible: false },
+    { id: "compound_name", name: "Solute Name", visible: false },
     { id: "solute_smiles", name: "Solute SMILES", visible: true },
     { id: "structure", name: "Solute Structure", visible: true },
     { id: "solvent_name", name: "Solvent Name", visible: true },
@@ -132,7 +132,7 @@ export default function MoleculeTable({ results }: MoleculeTableProps) {
     () => [
       {
         field: "compound_name",
-        headerName: "Compound Name",
+        headerName: "Solute Name",
         colId: "compound_name",
         minWidth: 150,
         filter: "agTextColumnFilter",

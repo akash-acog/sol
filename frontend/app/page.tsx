@@ -1,59 +1,24 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Sidebar from "@/components/sidebar";
 import OutputGrid from "@/components/output-grid";
 import Header from "@/components/header";
 import { PredictionResult, AnalysisResponse } from "@/lib/types";
 
 export default function Home() {
+  // Simple state initialization without sessionStorage
   const [results, setResults] = useState<
     PredictionResult[] | AnalysisResponse | null
-  >(() => {
-    if (typeof window !== "undefined") {
-      const savedResults = sessionStorage.getItem("solubilityResults");
-      if (savedResults) {
-        try {
-          return JSON.parse(savedResults);
-        } catch (e) {
-          console.error("Failed to parse saved results:", e);
-        }
-      }
-    }
-    return null;
-  });
+  >(null);
 
   const [resultType, setResultType] = useState<
     "prediction" | "screening" | null
-  >(() => {
-    if (typeof window !== "undefined") {
-      const savedType = sessionStorage.getItem("solubilityResultType");
-      if (savedType) {
-        return savedType as "prediction" | "screening";
-      }
-    }
-    return null;
-  });
+  >(null);
 
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // Save results to sessionStorage whenever they change
-  useEffect(() => {
-    if (results) {
-      sessionStorage.setItem("solubilityResults", JSON.stringify(results));
-    } else {
-      sessionStorage.removeItem("solubilityResults");
-    }
-  }, [results]);
-
-  // Save result type to sessionStorage
-  useEffect(() => {
-    if (resultType) {
-      sessionStorage.setItem("solubilityResultType", resultType);
-    } else {
-      sessionStorage.removeItem("solubilityResultType");
-    }
-  }, [resultType]);
+  // Remove all useEffect hooks that save/load from sessionStorage
 
   const handleProcess = (
     data: PredictionResult[] | AnalysisResponse,
@@ -67,8 +32,6 @@ export default function Home() {
   const handleClearResults = () => {
     setResults(null);
     setResultType(null);
-    sessionStorage.removeItem("solubilityResults");
-    sessionStorage.removeItem("solubilityResultType");
   };
 
   const handleProcessingStateChange = (processing: boolean) => {

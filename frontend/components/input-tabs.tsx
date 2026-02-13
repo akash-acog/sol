@@ -43,6 +43,7 @@ export default function InputTabs({
         <BatchSmilesInput
           task={task}
           onProcess={onProcess}
+          onClearResults={onClearResults} // ← ADD THIS LINE
           isProcessing={isProcessing}
           onProcessingStateChange={onProcessingStateChange}
           clearTrigger={clearTrigger}

@@ -31,8 +31,10 @@ export async function POST(request: NextRequest) {
 
     // Format data for backend according to sol/backend/main.py
     const backendPayload = csvData.map((row) => ({
-      solute_smiles: row.SMILES_Solute || row.solute_smiles,
-      solvent_smiles: row.SMILES_Solvent || row.solvent_smiles,
+      solute_smiles:
+        row.SMILES_Solute || row.solute_smiles || row.Solute_SMILES, // ← UPDATED: Added Solute_SMILES
+      solvent_smiles:
+        row.SMILES_Solvent || row.solvent_smiles || row.Solvent_SMILES, // ← UPDATED: Added Solvent_SMILES
       temperature_k: parseFloat(
         row.Temperature_K || row.temperature_k || "298.15",
       ),
@@ -69,7 +71,8 @@ export async function POST(request: NextRequest) {
         // Prediction data from backend
         solute_smiles: backendPayload[index].solute_smiles,
         solvent_smiles: backendPayload[index].solvent_smiles,
-        solvent_name: csvRow.Solvent || null,
+        solvent_name:
+          csvRow.Solvent_Name || csvRow.Solvent || csvRow.solvent_name || null, // ← FIXED: Added Solvent_Name
         temperature_k: pred.temperature_k,
         predicted_logs: pred.predicted_logs,
         warning: pred.warning,
