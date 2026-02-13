@@ -1,0 +1,267 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+
+    /* Info banner colors */
+    --info: 207 89% 86%;
+    --info-foreground: 207 90% 27%;
+    --info-border: 207 90% 54%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* AG Grid Custom Styling */
+.ag-theme-alpine {
+  --ag-font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,
+    Cantarell, "Helvetica Neue", sans-serif;
+  --ag-font-size: 14px;
+  --ag-background-color: white;
+  --ag-header-background-color: #f8f9fa;
+  --ag-header-foreground-color: #374151;
+  --ag-odd-row-background-color: #ffffff;
+  --ag-row-hover-color: #f3f4f6;
+  --ag-selected-row-background-color: #dbeafe;
+  --ag-border-color: #e5e7eb;
+  --ag-row-border-color: #e5e7eb;
+  --ag-header-height: 48px;
+  --ag-row-height: 100px;
+  --ag-header-column-separator-display: block;
+  --ag-header-column-separator-height: 100%;
+  --ag-header-column-separator-width: 1px;
+  --ag-header-column-separator-color: #e5e7eb;
+
+  /* 5-Scale Solubility Color System */
+  --solubility-excellent: #006400;
+  --solubility-excellent-foreground: #ffffff;
+
+  --solubility-good: #90ee90;
+  --solubility-good-foreground: #166534;
+
+  --solubility-moderate: #ffd700;
+  --solubility-moderate-foreground: #854d0e;
+
+  --solubility-poor: #ff8c00;
+  --solubility-poor-foreground: #9a3412;
+
+  --solubility-insoluble: #8b0000;
+  --solubility-insoluble-foreground: #ffffff;
+
+  /* 3-Scale Accuracy Color System */
+  --accuracy-excellent: hsl(145, 46%, 84%);
+  --accuracy-excellent-foreground: hsl(145, 63%, 22%);
+
+  --accuracy-good: hsl(49, 100%, 91%);
+  --accuracy-good-foreground: hsl(43, 95%, 26%);
+
+  --accuracy-poor: hsl(0, 89%, 91%);
+  --accuracy-poor-foreground: hsl(0, 65%, 27%);
+}
+
+/* AG Grid Header Styling */
+.ag-theme-alpine .ag-header {
+  border-bottom: 1px solid #e5e7eb;
+  font-weight: 600;
+}
+
+.ag-theme-alpine .ag-header-cell {
+  border-right: 1px solid #e5e7eb;
+}
+
+.ag-theme-alpine .ag-header-cell-label {
+  font-weight: 600;
+}
+
+/* AG Grid Cell Styling */
+.ag-theme-alpine .ag-cell {
+  border-right: 1px solid transparent;
+  display: flex;
+  align-items: center;
+}
+
+/* AG Grid Row Styling */
+.ag-theme-alpine .ag-row {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* AG Grid Root Wrapper */
+.ag-theme-alpine .ag-root-wrapper {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+}
+
+/* AG Grid Pagination */
+.ag-theme-alpine .ag-paging-panel {
+  border-top: 1px solid #e5e7eb;
+  font-size: 13px;
+  color: #374151;
+}
+
+/* Solubility Cell Styles - Using 5-Scale System (for AG Grid) */
+.ag-theme-alpine .solubility-excellent {
+  background-color: var(--solubility-excellent) !important;
+  color: var(--solubility-excellent-foreground) !important;
+  font-weight: 600;
+}
+
+.ag-theme-alpine .solubility-good {
+  background-color: var(--solubility-good) !important;
+  color: var(--solubility-good-foreground) !important;
+  font-weight: 600;
+}
+
+.ag-theme-alpine .solubility-moderate {
+  background-color: var(--solubility-moderate) !important;
+  color: var(--solubility-moderate-foreground) !important;
+  font-weight: 600;
+}
+
+.ag-theme-alpine .solubility-poor {
+  background-color: var(--solubility-poor) !important;
+  color: var(--solubility-poor-foreground) !important;
+  font-weight: 600;
+}
+
+.ag-theme-alpine .solubility-insoluble {
+  background-color: var(--solubility-insoluble) !important;
+  color: var(--solubility-insoluble-foreground) !important;
+  font-weight: 600;
+}
+
+/* Accuracy/Error Cell Styles - Using 3-Scale System (for AG Grid) */
+.ag-theme-alpine .accuracy-excellent {
+  background-color: var(--accuracy-excellent) !important;
+  color: var(--accuracy-excellent-foreground) !important;
+  font-weight: 600;
+}
+
+.ag-theme-alpine .accuracy-good {
+  background-color: var(--accuracy-good) !important;
+  color: var(--accuracy-good-foreground) !important;
+  font-weight: 600;
+}
+
+.ag-theme-alpine .accuracy-poor {
+  background-color: var(--accuracy-poor) !important;
+  color: var(--accuracy-poor-foreground) !important;
+  font-weight: 600;
+}
+
+/* Actual LogS Cell Styles */
+.ag-theme-alpine .actual-logs-cell {
+  font-style: italic;
+  color: #6b7280;
+  background-color: transparent;
+}
+
+.ag-theme-alpine .actual-logs-na {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Error Cell N/A Style */
+.ag-theme-alpine .error-na {
+  background-color: #f3f4f6;
+  color: #6b7280;
+  font-style: italic;
+  font-weight: normal;
+}
+
+/* FDA Approved Cell Style */
+.ag-theme-alpine .fda-approved {
+  background-color: var(--accuracy-excellent) !important;
+  color: var(--accuracy-excellent-foreground) !important;
+  font-weight: 600;
+}
+
+/* Source Cell Style */
+.ag-theme-alpine .source-cell {
+  font-size: 11px;
+  color: #6b7280;
+}
+
+/* Structure cell styling */
+.structure-cell-container {
+  @apply flex items-center justify-center w-20 h-20 bg-muted/20 rounded border border-border overflow-hidden cursor-pointer transition-colors;
+}
+
+.structure-cell-container:hover {
+  @apply bg-muted/40;
+}
+
+.structure-cell-image {
+  @apply w-full h-full object-contain p-1;
+}
+
+/* Legend Styles - Standalone classes for tooltips/legends (not scoped to AG Grid) */
+.legend-solubility-excellent {
+  background-color: #006400;
+  color: #ffffff;
+}
+
+.legend-solubility-good {
+  background-color: #90ee90;
+  color: #166534;
+}
+
+.legend-solubility-moderate {
+  background-color: #ffd700;
+  color: #854d0e;
+}
+
+.legend-solubility-poor {
+  background-color: #ff8c00;
+  color: #9a3412;
+}
+
+.legend-solubility-insoluble {
+  background-color: #8b0000;
+  color: #ffffff;
+}
+
+.legend-accuracy-excellent {
+  background-color: hsl(145, 46%, 84%);
+  color: hsl(145, 63%, 22%);
+}
+
+.legend-accuracy-good {
+  background-color: hsl(49, 100%, 91%);
+  color: hsl(43, 95%, 26%);
+}
+
+.legend-accuracy-poor {
+  background-color: hsl(0, 89%, 91%);
+  color: hsl(0, 65%, 27%);
+}

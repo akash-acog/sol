@@ -1,0 +1,24 @@
+# Backend-specific dependencies (CPU-only for Docker)
+fastapi==0.128.5
+uvicorn==0.40.0
+pydantic==2.12.5
+python-multipart==0.0.22
+
+# PyTorch (CPU version for Docker)
+torch==2.5.1
+torch-geometric==2.6.1
+
+# RDKit for chemistry
+rdkit==2025.9.3
+
+# Scientific computing
+numpy==1.26.4
+pandas==3.0.0
+scipy==1.17.0
+
+# Visualization for heatmaps
+matplotlib==3.9.4
+seaborn==0.13.2
+
+# Utilities
+requests==2.32.5

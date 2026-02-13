@@ -1,0 +1,50 @@
+version: "3.8"
+
+services:
+  solubility-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: solubility-api
+    restart: unless-stopped
+    networks:
+      - sol-network
+    ports:
+      - "8009:8000" # Expose backend port
+    labels:
+      - "user=maansi"
+      - "description=solubility-prediction"
+      - "port=8009"
+      - "security=none"
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  solubility-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # Pass backend URL as build argument (baked into the build)
+        BACKEND_URL: http://solubility-api:8000
+        NEXT_PUBLIC_API_BASE_URL: http://localhost:3001
+    container_name: solubility-frontend
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    labels:
+      - "user=akash"
+      - "description=solubility-prediction"
+      - "port=3001"
+      - "security=none"
+    networks:
+      - sol-network
+    depends_on:
+      - solubility-backend
+    environment:
+      - NODE_ENV=production
+      - BACKEND_URL= http://solubility-api:8009
+      - NEXT_PUBLIC_API_BASE_URL= http://localhost:3001
+
+networks:
+  sol-network:
+    driver: bridge
