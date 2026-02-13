@@ -4,13 +4,20 @@ export default function Header() {
   return (
     <header className="w-full bg-card border-b border-border px-8 py-4 shadow-sm">
       <div className="flex items-center justify-between">
-        {/* Logo on the left */}
+        {/* Logo on the left with Back to Home link */}
         <div className="flex-shrink-0">
-          <img
-            src="/aganitha-logo.png"
-            alt="Aganitha"
-            className="h-10 w-auto"
-          />
+          <a
+            href="/"
+            rel="noopener noreferrer"
+            className="block group"
+            title="Back to Aganitha Home"
+          >
+            <img
+              src="/aganitha-logo.png"
+              alt="Aganitha"
+              className="h-10 w-auto transition-opacity hover:opacity-80"
+            />
+          </a>
         </div>
 
         {/* Title centered */}

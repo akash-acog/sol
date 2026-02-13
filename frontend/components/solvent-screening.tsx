@@ -86,13 +86,7 @@ export default function SolventScreening({
   results,
   isLoading,
 }: SolventScreeningProps) {
-  const [view, setView] = useState<"heatmap" | "table">(() => {
-    if (typeof window !== "undefined") {
-      const savedView = sessionStorage.getItem("solventScreeningView");
-      return savedView === "table" ? "table" : "heatmap";
-    }
-    return "heatmap";
-  });
+  const [view, setView] = useState<"heatmap" | "table">("heatmap");
 
   const [isEnhancedContrast, setIsEnhancedContrast] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -111,11 +105,8 @@ export default function SolventScreening({
     if (results?.ranking_temperature_k) {
       setSelectedTemperature(300);
     }
+    setView("heatmap");
   }, [results]);
-
-  useEffect(() => {
-    sessionStorage.setItem("solventScreeningView", view);
-  }, [view]);
 
   // Get available temperatures from heatmap_data
   const availableTemperatures = useMemo(() => {
@@ -231,6 +222,13 @@ export default function SolventScreening({
   const columnDefs: ColDef<SolventRanking>[] = useMemo(
     () => [
       {
+        headerName: "Rank",
+        field: "rank",
+        width: 80,
+        sortable: true,
+        cellClass: "font-semibold",
+      },
+      {
         headerName: "Solvent Name",
         field: "solvent_name",
         width: 200,
@@ -284,9 +282,9 @@ export default function SolventScreening({
     ];
 
     const tempCols: ColDef<any>[] = availableTemperatures.map((temp) => ({
-      headerName: `${temp}K`,
+      headerName: `Predicted LogS @ ${temp}K`,
       field: temp.toString(),
-      width: 120,
+      width: 180,
       sortable: true,
       valueFormatter: (params) =>
         params.value != null ? params.value.toFixed(2) : "N/A",
@@ -504,6 +502,7 @@ export default function SolventScreening({
             <div className="ag-theme-alpine h-full w-full">
               <AgGridReact
                 theme="legacy"
+                key={tableMode}
                 rowData={
                   tableMode === "single" ? filteredRankings : multiTempData
                 }

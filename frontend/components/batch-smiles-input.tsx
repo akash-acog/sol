@@ -14,6 +14,7 @@ interface BatchSmilesInputProps {
     data: PredictionResult[] | AnalysisResponse,
     taskType: "solpred" | "solscreen",
   ) => void;
+  onClearResults: () => void; // ← ADD THIS LINE
   isProcessing: boolean;
   onProcessingStateChange: (processing: boolean) => void;
   clearTrigger: number;
@@ -22,6 +23,7 @@ interface BatchSmilesInputProps {
 export default function BatchSmilesInput({
   task,
   onProcess,
+  onClearResults, // ← ADD THIS LINE
   isProcessing,
   onProcessingStateChange,
   clearTrigger,
@@ -247,6 +249,10 @@ export default function BatchSmilesInput({
       }
     } catch (error) {
       console.error("Error processing CSV:", error);
+
+      // ← ADD THESE 2 LINES - Clear results on error
+      onClearResults();
+
       toast.error(
         `Error: ${error instanceof Error ? error.message : "Failed to process CSV file"}`,
       );
@@ -323,9 +329,9 @@ export default function BatchSmilesInput({
             {task === "solscreen" ? "Analyzing..." : "Processing..."}
           </span>
         ) : task === "solscreen" ? (
-          "Screen Solvents"
+          "Screen solvents"
         ) : (
-          "Process File"
+          "Predict solubility"
         )}
       </Button>
     </div>

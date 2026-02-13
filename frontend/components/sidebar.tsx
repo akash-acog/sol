@@ -41,7 +41,7 @@ export default function Sidebar({
   return (
     <>
       {/* SECTION 1: Header with Clear All Button */}
-      <div className="mb-4">
+      <div>
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
             <Settings2 className="w-5 h-5 text-primary" />
@@ -64,7 +64,7 @@ export default function Sidebar({
       </div>
 
       {/* SECTION 2: Task Selection Dropdown */}
-      <div className="space-y-2 mb-6">
+      <div className="space-y-2 mb-4">
         <Label
           htmlFor="task-select"
           className="text-sm font-semibold text-foreground"
